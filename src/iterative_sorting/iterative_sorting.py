@@ -2,18 +2,16 @@ from typing import List
 
 
 # TO-DO: Complete the selection_sort() function below
-def selection_sort(arr):
-    # loop through n-1 elements
-    for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
-        # TO-DO: find next smallest element
-        # (hint, can do in 3 loc)
-        # Your code here
+def selection_sort(arr: List[int]) -> List[int]:
+    smallest = 0
+    while smallest < len(arr) - 1:
+        index = smallest + 1
+        while index < len(arr):
+            if arr[index] < arr[smallest]:
+                arr[smallest], arr[index] = arr[index], arr[smallest]
 
-        # TO-DO: swap
-        # Your code here
-
+            index += 1
+        smallest += 1
     return arr
 
 
@@ -24,9 +22,7 @@ def bubble_sort(arr: List[int]) -> List[int]:
         swapped = False
         for index in range(len(arr) - 1):
             if arr[index] > arr[index + 1]:
-                temp = arr[index + 1]
-                arr[index + 1] = arr[index]
-                arr[index] = temp
+                arr[index], arr[index + 1] = arr[index + 1], arr[index]
                 swapped = True
 
     return arr
