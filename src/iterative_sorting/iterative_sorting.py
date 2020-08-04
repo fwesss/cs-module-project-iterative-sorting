@@ -1,7 +1,7 @@
-from typing import List
+from itertools import repeat
+from typing import List, Union
 
 
-# TO-DO: Complete the selection_sort() function below
 def selection_sort(arr: List[int]) -> List[int]:
     smallest = 0
     while smallest < len(arr) - 1:
@@ -15,7 +15,6 @@ def selection_sort(arr: List[int]) -> List[int]:
     return arr
 
 
-# TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr: List[int]) -> List[int]:
     swapped = True
     while swapped:
@@ -47,7 +46,16 @@ What is the time and space complexity of the counting sort algorithm?
 """
 
 
-def counting_sort(arr, maximum=None):
-    # Your code here
+def counting_sort(arr: List[int], maximum: int = 0) -> Union[str, List[int]]:
+    if len(arr) > 0:
+        buckets = [0] * (maximum + 1)
+        for number in arr:
+            if number < 0:
+                return "Error, negative numbers not allowed in Count Sort"
+            buckets[number] = arr.count(number)
+
+        arr.clear()
+        for index, number in enumerate(buckets):
+            arr.extend(repeat(index, number))
 
     return arr
