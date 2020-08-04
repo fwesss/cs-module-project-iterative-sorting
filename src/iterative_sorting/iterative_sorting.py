@@ -1,28 +1,33 @@
-# TO-DO: Complete the selection_sort() function below
-def selection_sort(arr):
-    # loop through n-1 elements
-    for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
-        # TO-DO: find next smallest element
-        # (hint, can do in 3 loc)
-        # Your code here
+from itertools import repeat
+from typing import List, Union
 
 
-        # TO-DO: swap
-        # Your code here
+def selection_sort(arr: List[int]) -> List[int]:
+    smallest = 0
+    while smallest < len(arr) - 1:
+        index = smallest + 1
+        while index < len(arr):
+            if arr[index] < arr[smallest]:
+                arr[smallest], arr[index] = arr[index], arr[smallest]
+
+            index += 1
+        smallest += 1
+    return arr
+
+
+def bubble_sort(arr: List[int]) -> List[int]:
+    swapped = True
+    while swapped:
+        swapped = False
+        for index in range(len(arr) - 1):
+            if arr[index] > arr[index + 1]:
+                arr[index], arr[index + 1] = arr[index + 1], arr[index]
+                swapped = True
 
     return arr
 
 
-# TO-DO:  implement the Bubble Sort function below
-def bubble_sort(arr):
-    # Your code here
-
-
-    return arr
-
-'''
+"""
 STRETCH: implement the Counting Sort function below
 
 Counting sort is a sorting algorithm that works on a set of data where
@@ -38,9 +43,19 @@ showed up, we can construct a sorted set of the input data from the
 buckets. 
 
 What is the time and space complexity of the counting sort algorithm?
-'''
-def counting_sort(arr, maximum=None):
-    # Your code here
+"""
 
+
+def counting_sort(arr: List[int], maximum: int = 0) -> Union[str, List[int]]:
+    if len(arr) > 0:
+        buckets = [0] * (maximum + 1)
+        for number in arr:
+            if number < 0:
+                return "Error, negative numbers not allowed in Count Sort"
+            buckets[number] = arr.count(number)
+
+        arr.clear()
+        for index, number in enumerate(buckets):
+            arr.extend(repeat(index, number))
 
     return arr
